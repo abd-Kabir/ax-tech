@@ -3,9 +3,9 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import get_async_session, async_session_maker
-from users.crud import retrieve_user, add_user, get_users
-from users.models import User
-from users.schemas import UserResponse, PostUser
+from src.users.crud import retrieve_user, add_user, get_users
+from src.users.models import User
+from src.users.schemas import UserResponse, PostUser, UserListResponse
 
 router = APIRouter(
     prefix="/users",
@@ -13,7 +13,7 @@ router = APIRouter(
 )
 
 
-@router.get('/{user_id}/', response_model=UserResponse)
+@router.get('/{user_id}', response_model=UserResponse)
 async def get_user(pk: int, session: AsyncSession = Depends(get_async_session)):
     user = await retrieve_user(pk, session)
     if not user:
@@ -31,10 +31,10 @@ async def get_user(pk: int, session: AsyncSession = Depends(get_async_session)):
     }
 
 
-@router.get('/list/')
-async def list_user(offset: int = 0, limit: int = 10):
-    print(123)
-    users = await get_users()
+@router.get('/list/', response_model=UserListResponse)
+async def list_of_user(session: AsyncSession = Depends(get_async_session)):
+    print(1)
+    users = await get_users(session)
     return {
         "status": 200,
         "data": users,

@@ -1,17 +1,15 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database import async_session_maker
-from users.models import User
-from users.hashing import Hasher
+from src.database import async_session_maker
+from src.users.models import User
+from src.users.hashing import Hasher
 
 
-async def get_users():
-    async with async_session_maker() as session:
-        async with session.begin():
-            query = select(User)
-            result = await session.execute(query)
-            return result.all()
+async def get_users(session: AsyncSession):
+    query = select(User)
+    result = await session.execute(query)
+    return result.scalars().all()
 
 
 async def retrieve_user(pk: int, session: AsyncSession):
