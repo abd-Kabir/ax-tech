@@ -32,8 +32,9 @@ async def get_user(pk: int, session: AsyncSession = Depends(get_async_session)):
 
 
 @router.get('/list/')
-async def list_user(session: AsyncSession = Depends(get_async_session)):
-    users = get_users(session)
+async def list_user(offset: int = 0, limit: int = 10):
+    print(123)
+    users = await get_users()
     return {
         "status": 200,
         "data": users,

@@ -6,10 +6,12 @@ from users.models import User
 from users.hashing import Hasher
 
 
-async def get_users(session: AsyncSession):
-    stmt = select(User)
-    result = await session.execute(stmt)
-    return result.all()
+async def get_users():
+    async with async_session_maker() as session:
+        async with session.begin():
+            query = select(User)
+            result = await session.execute(query)
+            return result.all()
 
 
 async def retrieve_user(pk: int, session: AsyncSession):
