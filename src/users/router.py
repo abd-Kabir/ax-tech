@@ -13,9 +13,9 @@ router = APIRouter(
 )
 
 
-@router.get('/{user_id}', response_model=UserResponse)
-async def get_user(pk: int, session: AsyncSession = Depends(get_async_session)):
-    user = await retrieve_user(pk, session)
+@router.get('/get/{user_id}/', response_model=UserResponse)
+async def get_user(user_id: int, session: AsyncSession = Depends(get_async_session)):
+    user = await retrieve_user(user_id, session)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     user = user[0]
@@ -33,7 +33,6 @@ async def get_user(pk: int, session: AsyncSession = Depends(get_async_session)):
 
 @router.get('/list/', response_model=UserListResponse)
 async def list_of_user(session: AsyncSession = Depends(get_async_session)):
-    print(1)
     users = await get_users(session)
     return {
         "status": 200,
@@ -57,3 +56,8 @@ async def create_user(user: PostUser):
         },
         "message": "OK"
     }
+
+
+@router.patch("/update/{user_id}")
+async def update_user(user_id: int):
+    pass

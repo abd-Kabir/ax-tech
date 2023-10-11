@@ -1,7 +1,7 @@
 from datetime import datetime
-from typing import List
+from typing import List, Annotated
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 from src.users.models import User
 
@@ -27,8 +27,5 @@ class UserResponse(BaseModel):
 
 class UserListResponse(BaseModel):
     status: int
-    data: List[User]
+    data: List[UserData]
     message: str
-
-    class Config:
-        arbitrary_types_allowed = True

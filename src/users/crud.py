@@ -12,8 +12,8 @@ async def get_users(session: AsyncSession):
     return result.scalars().all()
 
 
-async def retrieve_user(pk: int, session: AsyncSession):
-    stmt = select(User).filter(User.id == pk)
+async def retrieve_user(user_id: int, session: AsyncSession):
+    stmt = select(User).filter(User.id == user_id)
     result = await session.execute(stmt)
     return result.first()
 
@@ -31,3 +31,7 @@ async def add_user(user):
         await session.commit()
         await session.refresh(new_user)
         return new_user
+
+async def patch_user(user, session: AsyncSession):
+    pass
+    # stmt =
