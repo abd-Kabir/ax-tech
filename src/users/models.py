@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
 from sqlalchemy import MetaData, Integer, String, TIMESTAMP, Column, Boolean
 
 from src.database import Base
@@ -7,7 +8,7 @@ from src.database import Base
 metadata = MetaData()
 
 
-class User(Base):
+class User(SQLAlchemyBaseUserTable[int], Base):
     __tablename__ = "User"
 
     id = Column(Integer, primary_key=True)
