@@ -1,5 +1,7 @@
 # Task from AX-TECHNOLOGY!
-Я хотел поблагодарить что вы дали мне шанс проявить себя. Надеюсь, я выполнил заданный таск правильно и я смогу стать частью вашей команды)
+
+Я хотел поблагодарить что вы дали мне шанс проявить себя. Надеюсь, я выполнил заданный таск правильно и я смогу стать
+частью вашей команды)
 
 # Start Project
 
@@ -17,4 +19,5 @@ Run application with command:
 
 Link for [**OpenAPI/Swagger**](http://127.0.0.1:8000/docs)
 
-PS: I did successfully run the project with docker-compose (app + db), but the alembic migrations would not work properly, so decided to not include docker version of the app.
+PS: I did successfully run the project with docker-compose (app + db), but the alembic migrations would not work
+properly, so I decided to not include the docker version of the app.
